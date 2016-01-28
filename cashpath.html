@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cash Path</title>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link href="cashpath.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body id="page-top" data-spy="scroll">
+
+    <div id="map"></div>
+
+    <div id="menu">
+        <div class="col-sm-12">
+
+            <h1>Cash Path</h1>
+            <p>Compare the costs of getting to your destination</p>
+            <br>
+            <form id="initial-form" class="form-horizontal" role="form" method="get" >
+
+                <div id="form-group-1" class="form-group">
+                    <div class="col-sm-6 col-sm-offset-3 input-group input-group-lg">
+
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-record" aria-hidden="true"></span></span>
+
+                        <input type="text" class="form-control" id="origin" placeholder="Enter your starting point, or leave this blank for current location" aria-describedby="basic-addon1">
+
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div id="form-group-2" class="form-group">
+
+                    <div class="col-sm-6 col-sm-offset-3 input-group input-group-lg">
+
+                        <span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></span>
+
+                        <input type="text" class="form-control" id="destination" placeholder="Enter your destination" aria-describedby="basic-addon2">
+
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div id="form-group-3" class="form-group" style="text-align:center">
+
+                    <a href="google.ca" ><button type="submit" class="btn btn-default btn-lg">Search</button></a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <!--Kanav here's where you edit-->
+    <div class="col-sm-4">
+
+        <form role="form" method="get" style="padding:none;">
+            <div class="top-half">
+                <div class="form-group">
+                    <label  class="pull-left" for="origin">Origin:</label>
+                    <input id="orig" class="form-control" type="text" placeholder="Origin">
+                </div>
+
+                <div class="form-group form-group-2">
+                    <label class="pull-left" for="destination">Destination:</label>
+                    <input id="dest" class="form-control" type="text" placeholder="Destination">
+                </div>
+            </div>
+
+            <div class="form-group form-group-2">
+                <label class="pull-left" for="distance">Distance:</label>
+                <input id="dist" class="form-control" type="text" placeholder="Distance" disabled>
+            </div>
+
+            <div class="form-group form-group-2">
+                <label  class="pull-left" for="price">Cost:</label>
+                <input id="price" class="form-control" type="text" placeholder="Cost" disabled>
+            </div>
+        </form>
+        <center><a href="http://cashpath.tk"><button class="btn btn-default btn-sm">Search Again</button></a></center>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+
+<script>
+var origin, destination, store = "$0", totdist;
+/*$( "#origin" ).focus(function() {
+    //add fancy stuff
+});
+$( "#destination" ).focus(function() {
+    //add fancy stuff
+});*/
+jQuery(document).ready(function () {
+    /*var map;
+    var style =
+[{"elementType":"geometry","stylers":[{"hue":"#ff4400"},{"saturation":-68},{"lightness":-4},{"gamma":0.72}]},{"featureType":"road","elementType":"labels.icon"},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"hue":"#0077ff"},{"gamma":3.1}]},{"featureType":"water","stylers":[{"hue":"#00ccff"},{"gamma":0.44},{"saturation":-33}]},{"featureType":"poi.park","stylers":[{"hue":"#44ff00"},{"saturation":-23}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"hue":"#007fff"},{"gamma":0.77},{"saturation":65},{"lightness":99}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"gamma":0.11},{"weight":5.6},{"saturation":99},{"hue":"#0091ff"},{"lightness":-86}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"lightness":-48},{"hue":"#ff5e00"},{"gamma":1.2},{"saturation":-23}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"saturation":-64},{"hue":"#ff9100"},{"lightness":16},{"gamma":0.47},{"weight":2.7}]}]
+    var options = {
+        zoom: 11,
+        center:  new google.maps.LatLng(43.7000, -79.4000),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true
+    };
+    map = new google.maps.Map($('#map')[0], options);
+    map.setOptions({
+        styles: style
+    });*/
+});
+$("#form-group-3 button").on("click",function(){
+    submit();
+});
+/*$('#initial-form').submit(function(event) {
+    origin = $('#origin').val(function(){
+        destination = $('#destination').val(function(){
+           //make sure values are collected before removal
+        });
+    });
+    console.log("origin: " + origin);
+    //add logic here to dfault to current location when field is blank
+    //submit();
+});*/
+function submit(){
+event.preventDefault();
+console.log("hello");
+    origin = $("input#origin").val();
+    destination = $("input#destination").val();
+    $('#menu').remove();
+    console.log("origin is " + origin +  " and destination is " + destination);
+            //sidd's code
+    //var origin = new google.maps.LatLng(55.930385, -3.118425),
+    //var origin = "Toronto, ON",
+        //destination = "Pickering, ON",
+        service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+        {
+            origins: [destination],
+            destinations: [origin],
+            travelMode: google.maps.TravelMode.DRIVING,
+            avoidHighways: false,
+            avoidTolls: false
+        },
+        callback
+    );
+    function callback(response, status) {
+        var orig = document.getElementById("orig"),
+            dest = document.getElementById("dest"),
+            dist = document.getElementById("dist"),
+            price = document.getElementById("price");
+        if(status=="OK") {
+            orig.value = response.destinationAddresses[0];
+            dest.value = response.originAddresses[0];
+            dist.value = response.rows[0].elements[0].distance.text;
+            totdist = dist.value.slice(0, dist.value.length-3);
+            var check = false;
+            
+            for( var i=0; i < totdist.length; i++){
+                if(totdist[i] == ','){
+                    check = true;
+                }
+            }
+            
+            
+            
+            
+            
+            if(check == true){
+                var a = parseFloat(totdist);
+                var b = totdist.slice(2, 5);
+                b = parseFloat(b);
+                totdist = (a*1000)+b;
+            }
+            else totdist = parseFloat(totdist);
+           //dist.value = 9;
+            var a = totdist/1.6;
+            var mileage = 24;
+            var befgal = a/mileage;
+            var liters = befgal*3.78541;
+            var p = liters *0.95;
+            var sum = 0;
+            var deci = false;
+            price.value = p.toFixed(2).toString();//dist.value.length;
+            price.value = '$' + price.value;
+            store = price.value;
+            //price.value = totdist;
+        } else {
+            alert("Error: " + status);
+        }
+    }
+    console.log("hello");
+}
+function initMap() {
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsService = new google.maps.DirectionsService;
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 5,
+    center: {lat: 43, lng: -79}
+  });
+  directionsDisplay.setMap(map);
+
+  calculateAndDisplayRoute(directionsService, directionsDisplay);
+  document.getElementById('mode').addEventListener('change', function() {
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  });
+}
+var abc = 0;
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+if(abc == 0) var selectedMode = "DRIVING";
+else var selectedMode = document.getElementById('mode').value;
+
+  abc++;
+  if(selectedMode == "WALKING"){
+    price.value = "$0";
+  }
+  if(selectedMode == "TRANSIT"){
+  if(store == "$0.43"){
+  	price.value = "$3.00";
+  }
+    else price.value = "$" + ((Math.random()*(totdist/20)) + totdist / 5).toFixed(2);
+  }
+  if(selectedMode == "DRIVING"){
+    price.value = store;
+  }
+  if(selectedMode == "BICYCLING"){
+    price.value = "$0";
+  }
+  directionsService.route({
+    origin: origin,  // Haight.
+    destination: destination,  // Ocean Beach.s
+    // Note that Javascript allows us to access the constant
+    // using square brackets and a string value as its
+    // "property."
+    //if(selectedMode=="WALKING") price.value = "$0";
+
+    travelMode: google.maps.TravelMode[selectedMode]
+  }, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+}
+
+</script>
+<style>height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+#floating-panel {
+  /*position: absolute;*/
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: rgba(140,120,115,0.8);
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: left;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+    </style>
+
+    <div id="floating-panel">
+    <b style="padding-left: 30px">Mode of Travel: </b>
+    <select id="mode">
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="TRANSIT">Transit</option>
+    </select>
+    </div>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHqPLMPld6nxWlOTmRhH53KhqSeA_b8dY&signed_in=true&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
